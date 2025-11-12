@@ -1,0 +1,65 @@
+:root {
+  --background-color: #f5efeb;
+  --day-color: linear-gradient(45deg, rgb(141, 190, 215), rgb(7, 97, 142));
+  --night-color: linear-gradient(45deg, rgb(67, 97, 148), rgb(2, 22, 40));
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background-color);
+  color: #f5efeb;
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif;
+}
+
+.wrapper {
+  width: 80vw;
+  max-width: 700px;
+  min-width: 350px;
+  padding: 30px;
+  background: var(--day-color);
+  border-radius: 5px;
+  margin-top: 10vh;
+  text-align: center;
+}
+
+.search-bar {
+  height: 40px;
+  width: 100%;
+  margin: 20px 0;
+  border: 1px solid var(--background-color);
+  border-radius: 5px;
+  display: flex;
+}
+
+.search-bar > input {
+  outline: none;
+  border: none;
+  background: none;
+  color: var(--background-color);
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+}
+
+.search-bar > button {
+  border: none;
+  background-color: var(--background-color);
+  color: rgb(36, 97, 125);
+  width: 50px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.weather-card {
+  height: 100px;
+  width: 100%;
+  background-color: black;
+  border-radius: 5px;
+}
