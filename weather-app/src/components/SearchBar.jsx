@@ -1,20 +1,30 @@
-import { useState } from "react";
+import { useRef } from "react";
+import CityData from "./CityData";
 
-function SearchBar() {
-  const [inputCity, setInputCity] = useState("");
+function SearchBar({ setInputCity }) {
+  const inputRef = useRef(null);
 
-  const handleChange = (e) => {
-    setInputCity(e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const value = inputRef.current.value;
+
+    setInputCity(value);
   };
 
   return (
-    <form className="search-bar">
+    <form className="search-bar" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="請輸入城市"
-        value={inputCity}
-        onChange={handleChange}
+        ref={inputRef}
+        list="cityData"
       />
+      <datalist id="cityData">
+        {CityData.map((cityName) => (
+          <option key={cityName} value={cityName} />
+        ))}
+      </datalist>
       <button type="submit">查詢</button>
     </form>
   );

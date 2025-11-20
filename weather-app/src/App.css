@@ -57,9 +57,17 @@ body {
   cursor: pointer;
 }
 
+.weather-wrapper {
+  display: flex;
+}
+
 .weather-card {
-  height: 100px;
-  width: 100%;
-  background-color: black;
+  padding: 0 30px;
+  height: 120px;
+}
+
+.weather-content {
+  width: 80%;
+  background-color: rgba(33, 49, 63, 0.1);
   border-radius: 5px;
 }
