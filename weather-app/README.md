@@ -1,8 +1,8 @@
 # 截圖
 
-![day demo]("public/screenshot/day demo.png")
-![night demo]("public/night demo/day demo.png")
-![RWD demo]("public/screenshot/RWD demo.png")
+![day demo](public/screenshot/day-demo.png)
+![night demo](public/screenshot/night-demo.png)
+![RWD demo](public/screenshot/RWD-demo.png)
 
 # 天氣預報網頁
 
