@@ -1,12 +1,8 @@
 import "weather-icons/css/weather-icons.css";
 
-const Images = ({ weatherText }) => {
+const Images = ({ weatherText, isDay }) => {
   const text = String(weatherText || "");
   const icons = [];
-
-  // 判斷白天或夜晚
-  const hour = new Date().getHours();
-  const isDay = hour >= 6 && hour < 18;
 
   // 多雲時晴
   if (text.includes("雲") && text.includes("晴"))

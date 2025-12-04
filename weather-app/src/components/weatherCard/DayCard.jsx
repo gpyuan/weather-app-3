@@ -1,11 +1,10 @@
-import React from "react";
 import Images from "./Images";
 
-const DayCard = ({ day, date, onClick }) => {
+const DayCard = ({ date, day, onClick, isDay }) => {
   return (
-    <div onClick={onClick}>
+    <div className="day-card" onClick={onClick}>
       <p>{date}</p>
-      <Images weatherText={day.weather} />
+      <Images weatherText={day.weather} isDay={isDay} />
     </div>
   );
 };

@@ -1,7 +1,11 @@
 :root {
   --background-color: #f5efeb;
   --day-color: linear-gradient(45deg, rgb(141, 190, 215), rgb(7, 97, 142));
-  --night-color: linear-gradient(45deg, rgb(67, 97, 148), rgb(2, 22, 40));
+  --night-color: linear-gradient(
+    45deg,
+    rgb(184, 183, 239),
+    rgba(9, 1, 31, 0.623)
+  );
 }
 
 * {
@@ -23,10 +27,17 @@ body {
   max-width: 700px;
   height: 300px;
   padding: 30px 20px;
-  background: var(--day-color);
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   margin-top: 10vh;
   text-align: center;
+}
+
+.wrapper.day {
+  background: var(--day-color);
+}
+
+.wrapper.night {
+  background: var(--night-color);
 }
 
 .search-bar {
@@ -74,12 +85,12 @@ body {
 
 .weather-content i {
   font-size: 3rem;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .weather-content div {
   display: flex;
-  margin: 0 10px;
+  margin: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -89,13 +100,39 @@ body {
   display: flex;
   width: 80vw;
   max-width: 700px;
-  margin: 40px -20px;
+  margin: 30px -20px;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 20px;
-  border-radius: 5px;
-  background-color: rgba(25, 94, 155, 0.623);
+  border-radius: 0 0 5px 5px;
 }
 
-/* .forecast-item {
+.weekly-forecast.day {
+  background: var(--day-color);
+}
 
-} */
+.weekly-forecast.night {
+  background: var(--night-color);
+}
+
+.day-card p {
+  margin: 5px;
+}
+
+.day-card:hover {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+}
+
+.weatherbg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
