@@ -1,8 +1,13 @@
 # 截圖
 
-![Day Demo](assets/day-demo.png)
-![Night Demo](assets/night-demo.png)
-![RWD Demo](assets/RWD-demo.png)
+## 白天畫面
+![day demo](./public/assets/day-demo.png)
+
+## 晚上畫面
+![night demo](./public/assets/night-demo.png)
+
+## 手機畫面
+![RWD demo](./public/assets/RWD-demo.png)
 
 # 天氣預報網頁
 
