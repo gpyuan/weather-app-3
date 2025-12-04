@@ -1,16 +1,45 @@
-# React + Vite
+# 截圖
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![day demo]("public/screenshot/day demo.png")
+![night demo]("public/night demo/day demo.png")
+![RWD demo]("public/screenshot/RWD demo.png")
 
-Currently, two official plugins are available:
+# 天氣預報網頁
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+使用 React 製作的簡單天氣預報網頁，可查詢台灣城市的即時天氣與 7 日預報。icons 及背景圖片依日夜切換，並有響應式設計。
 
-## React Compiler
+## 功能特色
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 查詢指定城市的即時天氣
+- 顯示 7 日天氣預報與溫度、降雨機率、風速、紫外線指數、濕度
+- 日夜背景自動切換
+- 使用 Weather Icons 顯示天氣圖示
+- 響應式設計，適用桌機與行動裝置
+- 點擊每日預報可切換主要天氣資訊
 
-## Expanding the ESLint configuration
+## 技術
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React (Functional Components + Hooks)
+- CSS Flexbox / Grid
+- OpenData 台灣氣象資料 API
+- Weather Icons
+
+## 專案結構
+
+```
+weather-app/
+├─ src/
+│  ├─ components/
+│  │  ├─ WeatherWrapper.jsx
+│  │  ├─ WeatherCard/
+│  │  │  ├─ WeatherCard.jsx
+│  │  │  └─ DayCard.jsx
+│  │  ├─ WeatherWindow.jsx
+│  │  └─ SearchBar.jsx
+│  ├─ hooks/
+│  │  └─ useWeather.js
+│  ├─ App.js
+│  └─ App.css
+├─ public/
+└─ package.json
+```
