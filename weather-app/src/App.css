@@ -1,13 +1,3 @@
-:root {
-  --background-color: #f5efeb;
-  --day-color: linear-gradient(45deg, rgb(141, 190, 215), rgb(7, 97, 142));
-  --night-color: linear-gradient(
-    45deg,
-    rgb(184, 183, 239),
-    rgba(9, 1, 31, 0.623)
-  );
-}
-
 * {
   padding: 0;
   margin: 0;
@@ -15,7 +5,7 @@
 }
 
 body {
-  background: var(--background-color);
+  height: 100%;
   color: #f5efeb;
   display: flex;
   justify-content: center;
@@ -25,26 +15,18 @@ body {
 .wrapper {
   width: 80vw;
   max-width: 700px;
-  height: 300px;
+  min-height: 300px;
   padding: 30px 20px;
   border-radius: 5px 5px 0 0;
   margin-top: 10vh;
   text-align: center;
 }
 
-.wrapper.day {
-  background: var(--day-color);
-}
-
-.wrapper.night {
-  background: var(--night-color);
-}
-
 .search-bar {
   height: 40px;
   width: 100%;
   margin: 20px 0;
-  border: 1px solid var(--background-color);
+  border: 1px solid #f5efeb;
   border-radius: 5px;
   display: flex;
 }
@@ -53,7 +35,7 @@ body {
   outline: none;
   border: none;
   background: none;
-  color: var(--background-color);
+  color: #f5efeb;
   width: 100%;
   height: 100%;
   padding-left: 10px;
@@ -61,7 +43,7 @@ body {
 
 .search-bar > button {
   border: none;
-  background-color: var(--background-color);
+  background-color: #f5efeb;
   color: rgb(36, 97, 125);
   width: 50px;
   height: 100%;
@@ -78,9 +60,9 @@ body {
 }
 
 .weather-content {
-  background-color: rgba(33, 49, 63, 0.1);
   border-radius: 5px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .weather-content i {
@@ -104,15 +86,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  border-radius: 0 0 5px 5px;
-}
-
-.weekly-forecast.day {
-  background: var(--day-color);
-}
-
-.weekly-forecast.night {
-  background: var(--night-color);
+  border-radius: 5px;
+  background: rgba(49, 53, 57, 0.2);
 }
 
 .day-card p {
@@ -129,10 +104,37 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: -2;
+}
+
+@media (max-width: 800px) {
+  .wrapper {
+    margin-top: 0;
+  }
+  .wrapper > h1 {
+    font-size: 1rem;
+  }
+  .weather-wrapper {
+    flex-direction: column;
+  }
+  .weather-content {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .weather-content > div {
+    padding: 10px;
+  }
+  .weekly-forecast {
+    margin-top: 30px;
+    width: 80vw;
+    gap: 15px;
+    overflow-x: scroll;
+  }
 }
