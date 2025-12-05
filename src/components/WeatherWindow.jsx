@@ -6,7 +6,7 @@ const WeatherWindow = ({ weatherText }) => {
   const hour = new Date().getHours();
   const isDay = hour >= 6 && hour < 18;
 
-  const folder = isDay ? "/day" : "/night";
+  const folder = isDay ? "day" : "night";
   let bgName = "mostly-clear.jpg";
 
   if (text.includes("晴時多雲")) bgName = "mostly-clear.jpg";
@@ -18,7 +18,7 @@ const WeatherWindow = ({ weatherText }) => {
   else if (text.includes("雷")) bgName = "thunder.jpg";
   else if (text.includes("雪")) bgName = "snow.jpg";
 
-  const bgImage = `${folder}/${bgName}`;
+  const bgImage = `${import.meta.env.BASE_URL}${folder}/${bgName}`;
 
   return (
     <>
