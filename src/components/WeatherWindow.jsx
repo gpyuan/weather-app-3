@@ -7,7 +7,8 @@ const WeatherWindow = ({ weatherText }) => {
   const isDay = hour >= 6 && hour < 18;
 
   const folder = isDay ? "day" : "night";
-  let bgName = "mostly-clear.jpg";
+  // let bgName = "mostly-clear.jpg";
+  let bgName = "clear.jpg";
 
   if (text.includes("晴時多雲")) bgName = "mostly-clear.jpg";
   else if (text.includes("多雲時晴")) bgName = "partly-clear.jpg";
@@ -19,7 +20,11 @@ const WeatherWindow = ({ weatherText }) => {
   else if (text.includes("雪")) bgName = "snow.jpg";
 
   const bgImage = `${import.meta.env.BASE_URL}${folder}/${bgName}`;
-
+  console.log("BASE_URL:", import.meta.env.BASE_URL);
+  console.log("folder:", folder);
+  console.log("bgName:", bgName);
+  console.log("完整路徑 bgImage:", bgImage);
+  console.log("實際天氣文字:", weatherText);
   return (
     <>
       <div
