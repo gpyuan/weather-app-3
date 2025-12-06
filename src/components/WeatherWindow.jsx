@@ -20,11 +20,7 @@ const WeatherWindow = ({ weatherText }) => {
   else if (text.includes("雪")) bgName = "snow.jpg";
 
   const bgImage = `${import.meta.env.BASE_URL}${folder}/${bgName}`;
-  console.log("BASE_URL:", import.meta.env.BASE_URL);
-  console.log("folder:", folder);
-  console.log("bgName:", bgName);
-  console.log("完整路徑 bgImage:", bgImage);
-  console.log("實際天氣文字:", weatherText);
+
   return (
     <>
       <div

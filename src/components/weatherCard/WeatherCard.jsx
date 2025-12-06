@@ -132,11 +132,11 @@ function WeatherCard({ inputCity, onWeatherText, isDay }) {
         <div className="weather-content">
           <div>
             <i className="fa-solid fa-umbrella"></i>
-            <p>{selectedDay.rain}%</p>
+            <p>降雨機率：{selectedDay.rain}%</p>
           </div>
           <div>
             <i className="fa-solid fa-wind"></i>{" "}
-            <p>風速：{selectedDay.windSpeed}公里/時</p>
+            <p>風速：{selectedDay.windSpeed} (公里/時)</p>
           </div>
           <div>
             <i className="fa-solid fa-sun"></i>

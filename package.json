@@ -6,7 +6,7 @@
   "homepage": "https://gpyuan.github.io/weather-app-3/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=/weather-app-3/",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
