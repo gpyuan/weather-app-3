@@ -1,3 +1,7 @@
+# 天氣預報網頁
+
+🟢 [立即查看 DEMO](https://gpyuan.github.io/weather-app-3/)
+
 # 截圖
 
 ## 白天畫面
@@ -9,7 +13,7 @@
 ## 手機畫面
 ![RWD demo](./public/assets/RWD-demo.png)
 
-# 天氣預報網頁
+# 簡介
 
 使用 React 製作的簡單天氣預報網頁，可查詢台灣城市的即時天氣與 7 日預報。icons 及背景圖片依日夜切換，並有響應式設計。
 
