@@ -13,7 +13,7 @@ body {
 }
 
 .wrapper {
-  width: 80vw;
+  width: 90vw;
   max-width: 700px;
   min-height: 300px;
   padding: 30px 20px;
@@ -74,7 +74,7 @@ body {
   display: flex;
   margin: 10px;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 
@@ -88,6 +88,10 @@ body {
   padding: 10px 20px;
   border-radius: 5px;
   background: rgba(49, 53, 57, 0.2);
+}
+.day-card {
+  height: 100%;
+  width: 100%;
 }
 
 .day-card p {
@@ -123,18 +127,17 @@ body {
     flex-direction: column;
   }
   .weather-content {
+    width: 100%;
     margin-top: 30px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .weather-content > div {
-    padding: 10px;
-  }
   .weekly-forecast {
     margin-top: 30px;
     width: 80vw;
     gap: 15px;
-    overflow-x: scroll;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 }

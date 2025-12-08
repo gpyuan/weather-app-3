@@ -136,7 +136,10 @@ function WeatherCard({ inputCity, onWeatherText, isDay }) {
           </div>
           <div>
             <i className="fa-solid fa-wind"></i>{" "}
-            <p>風速：{selectedDay.windSpeed} (公里/時)</p>
+            <p>
+              風速：{selectedDay.windSpeed} <br />
+              (公里/時)
+            </p>
           </div>
           <div>
             <i className="fa-solid fa-sun"></i>
