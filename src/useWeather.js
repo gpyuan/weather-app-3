@@ -12,26 +12,15 @@ function useWeather(inputCity) {
   useEffect(() => {
     if (!inputCity) return;
 
-    // let loadingTimeoutId;
-
     const fetchWeather = async () => {
       setError(null);
-
-      // 避免快速回應時閃爍
-      // const showLoading = () => setLoading(true);
-      // let loadingTimeoutId = setTimeout(setLoading(true), 500);
 
       try {
         const response = await fetch(apiUrl(inputCity));
         const data = await response.json();
         setWeatherData(data);
-
-        // clearTimeout(loadingTimeoutId);
       } catch (err) {
-        // clearTimeout(loadingTimeoutId);
         setError(err.message);
-      } finally {
-        // setLoading(false);
       }
     };
 

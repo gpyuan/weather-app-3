@@ -8,8 +8,10 @@ function SearchBar({ setInputCity }) {
     e.preventDefault();
 
     const value = inputRef.current.value;
+    if (!value.trim()) return;
 
     setInputCity(value);
+    inputRef.current.value = "";
   };
 
   return (

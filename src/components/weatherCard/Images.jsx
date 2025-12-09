@@ -2,44 +2,49 @@ import "weather-icons/css/weather-icons.css";
 
 const Images = ({ weatherText, isDay }) => {
   const text = String(weatherText || "");
-  const icons = [];
 
-  // 多雲時晴
-  if (text.includes("雲") && text.includes("晴"))
-    icons.push({
-      class: isDay ? "wi wi-day-cloudy" : "wi wi-night-alt-cloudy",
-      style: { marginTop: "15px" },
-    });
-  // 晴
-  else if (text.includes("晴"))
-    icons.push({
-      class: isDay ? "wi wi-day-sunny" : "wi wi-night-clear",
-    });
-  // 雨
-  else if (text.includes("雨"))
-    icons.push({
-      class: isDay ? "wi wi-day-rain" : "wi wi-night-alt-rain",
-    });
-  // 雷
-  else if (text.includes("雷"))
-    icons.push({
-      class: isDay ? "wi wi-day-lightning" : "wi wi-night-alt-lightning",
-    });
-  // 多雲
-  else if (text.includes("多雲") || text.includes("陰"))
-    icons.push({
-      class: "wi wi-cloudy",
-    });
-  // 雲
-  else if (text.includes("雲"))
-    icons.push({
-      class: isDay ? "wi wi-day-cloudy" : "wi wi-night-alt-cloudy",
-    });
-  // 雪
-  else if (text.includes("雪"))
-    icons.push({
-      class: "wi wi-snow",
-    });
+  // 依關鍵字建立對照表（由最特殊 → 到較一般）
+  const iconRules = [
+    {
+      key: ["雲", "晴"],
+      icon: isDay ? "wi wi-day-cloudy" : "wi wi-night-alt-cloudy",
+    },
+    {
+      key: ["晴"],
+      icon: isDay ? "wi wi-day-sunny" : "wi wi-night-clear",
+    },
+    {
+      key: ["雷"],
+      icon: isDay ? "wi wi-day-lightning" : "wi wi-night-alt-lightning",
+    },
+    {
+      key: ["雨"],
+      icon: isDay ? "wi wi-day-rain" : "wi wi-night-alt-rain",
+    },
+    {
+      key: ["多雲"],
+      icon: "wi wi-cloudy",
+    },
+    {
+      key: ["陰"],
+      icon: "wi wi-cloudy",
+    },
+    {
+      key: ["雲"],
+      icon: isDay ? "wi wi-day-cloudy" : "wi wi-night-alt-cloudy",
+    },
+    {
+      key: ["雪"],
+      icon: "wi wi-snow",
+    },
+  ];
+
+  // 找到第一個符合條件的 icon
+  const matched = iconRules.find((rule) =>
+    rule.key.every((k) => text.includes(k))
+  );
+
+  const icons = matched ? [{ class: matched.icon }] : []; // 若沒有符合，不顯示 icon
 
   return (
     <div>
