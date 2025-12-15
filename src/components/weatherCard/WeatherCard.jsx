@@ -3,9 +3,13 @@ import useWeather from "../../useWeather";
 import DayCard from "./DayCard";
 
 function WeatherCard({ inputCity, onWeatherText, isDay }) {
+  const [loading, setLoading] = useState(false);
+  const [showNotFound, setShowNotFound] = useState(false);
   const { weatherData, error } = useWeather(inputCity);
   const [selectedDay, setSelectedDay] = useState(null);
   const [weeklyWeather, setWeeklyWeather] = useState([]);
+  const [animate, setAnimate] = useState(false);
+  const [isChangingCity, setIsChangingCity] = useState(false);
 
   const locations = weatherData?.records?.Locations?.[0]?.Location ?? [];
   const found = locations.find((loc) => loc.LocationName === inputCity);
@@ -79,58 +83,147 @@ function WeatherCard({ inputCity, onWeatherText, isDay }) {
     onWeatherText?.(day.weather);
   };
 
-  if (error) return <p>錯誤：{error}</p>;
-  if (!weatherData) return <p>資料尚未載入...</p>;
-  if (!found) return <p>查無資料，請確認城市輸入是否正確</p>;
-  if (!selectedDay) return <p>資料處理中...</p>;
+  useEffect(() => {
+    setAnimate(false); // 立即隱藏
+    setSelectedDay(null); // 清空舊資料
+    setWeeklyWeather([]); // 清空舊資料
+  }, [inputCity]);
+
+  //  控制 loading 避免閃爍
+  useEffect(() => {
+    setLoading(false);
+
+    const timer = setTimeout(() => {
+      if (!weatherData) {
+        setLoading(true);
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [inputCity]);
+
+  useEffect(() => {
+    if (weatherData) {
+      setLoading(false);
+    }
+  }, [weatherData]);
+
+  //  控制 notfound 避免閃爍
+  useEffect(() => {
+    setShowNotFound(false);
+
+    if (!weatherData || loading) return;
+
+    const timer = setTimeout(() => {
+      if (!found) {
+        setShowNotFound(true);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [weatherData, found, inputCity, loading]);
+
+  // 當城市改變時，標記為「正在切換城市」
+  useEffect(() => {
+    setIsChangingCity(true);
+    setAnimate(false);
+  }, [inputCity]);
+
+  // 當新資料到達時，解除「正在切換城市」標記
+  useEffect(() => {
+    if (weatherData && found) {
+      setIsChangingCity(false);
+    }
+  }, [weatherData, found]);
+
+  // 當 weeklyWeather 更新時觸發動畫
+  useEffect(() => {
+    if (weeklyWeather.length > 0 && !isChangingCity) {
+      setAnimate(false);
+
+      const timer = setTimeout(() => {
+        setAnimate(true);
+      }, 50);
+
+      return () => clearTimeout(timer);
+    }
+  }, [weeklyWeather, isChangingCity]);
+
+  // if (error) return <p>錯誤：{error}</p>;
+  // if (loading) return <p>資料尚未載入...</p>;
+  // if (showNotFound) return <p>查無資料，請確認城市輸入是否正確</p>;
+  // if (!selectedDay) return <p>資料處理中...</p>;
 
   return (
     <>
-      <div className="weather-wrapper">
-        <div className="weather-card">
-          <h2>{inputCity}</h2>
+      {error && <p className="message">{`錯誤：${error}`}</p>}
+      {loading && <p className="message">{`資料尚未載入...`}</p>}
+      {showNotFound && (
+        <p className="message">{`查無資料，請確認城市輸入是否正確`}</p>
+      )}
+      {!loading && !showNotFound && !error && !isChangingCity && (
+        <>
+          {!selectedDay && <p className="message">資料處理中...</p>}{" "}
+          <div
+            key={selectedDay?.date}
+            className={`weather-wrapper ${
+              animate ? "slideUp-wrapper" : "hidden"
+            }`}
+          >
+            {selectedDay && (
+              <>
+                <div className="weather-card">
+                  <h2>{inputCity}</h2>
 
-          <div style={{ fontSize: "3.5rem", marginLeft: "20px" }}>
-            {selectedDay.temp}°
-          </div>
-          <div>{selectedDay.weather}</div>
-        </div>
+                  <div style={{ fontSize: "3.5rem", marginLeft: "20px" }}>
+                    {selectedDay.temp}°
+                  </div>
+                  <div>{selectedDay.weather}</div>
+                </div>
 
-        <div className="weather-content">
-          <div>
-            <i className="fa-solid fa-umbrella"></i>
-            <p>降雨機率：{selectedDay.rain}%</p>
+                <div className="weather-content">
+                  <div>
+                    <i className="fa-solid fa-umbrella"></i>
+                    <p>降雨機率：{selectedDay.rain}%</p>
+                  </div>
+                  <div>
+                    <i className="fa-solid fa-wind"></i>
+                    <p>
+                      風速：{selectedDay.windSpeed}
+                      <br />
+                      (公里/時)
+                    </p>
+                  </div>
+                  <div>
+                    <i className="fa-solid fa-sun"></i>
+                    <p>紫外線指數：{selectedDay.UVIndex}</p>
+                  </div>
+                  <div>
+                    <i className="fa-solid fa-droplet"></i>
+                    <p>濕度：{selectedDay.humidity}%</p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-          <div>
-            <i className="fa-solid fa-wind"></i>
-            <p>
-              風速：{selectedDay.windSpeed}
-              <br />
-              (公里/時)
-            </p>
+          <div
+            key={weeklyWeather.map((d) => d.date).join("-")}
+            className={`weekly-forecast ${isDay ? "day" : "night"} ${
+              animate ? "slideUp-forecast" : "hidden"
+            }`}
+          >
+            {weeklyWeather.map((day) => (
+              <DayCard
+                key={day.date}
+                day={day}
+                date={day.dateLabel}
+                onClick={() => handleDayClick(day)}
+                isDay={isDay}
+              />
+            ))}
           </div>
-          <div>
-            <i className="fa-solid fa-sun"></i>
-            <p>紫外線指數：{selectedDay.UVIndex}</p>
-          </div>
-          <div>
-            <i className="fa-solid fa-droplet"></i>
-            <p>濕度：{selectedDay.humidity}%</p>
-          </div>
-        </div>
-      </div>
-
-      <div className={`weekly-forecast ${isDay ? "day" : "night"}`}>
-        {weeklyWeather.map((day) => (
-          <DayCard
-            key={day.date}
-            day={day}
-            date={day.dateLabel}
-            onClick={() => handleDayClick(day)}
-            isDay={isDay}
-          />
-        ))}
-      </div>
+        </>
+      )}
     </>
   );
 }

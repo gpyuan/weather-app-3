@@ -3,7 +3,6 @@ import "weather-icons/css/weather-icons.css";
 const Images = ({ weatherText, isDay }) => {
   const text = String(weatherText || "");
 
-  // 依關鍵字建立對照表（由最特殊 → 到較一般）
   const iconRules = [
     {
       key: ["雲", "晴"],
