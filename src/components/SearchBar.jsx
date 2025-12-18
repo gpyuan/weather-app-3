@@ -2,6 +2,7 @@ import { useRef } from "react";
 import CityData from "./CityData";
 
 function SearchBar({ setInputCity }) {
+  // 用 ref 直接存取 input DOM (避免不必要的重新渲染)
   const inputRef = useRef(null);
 
   const handleSubmit = (e) => {
@@ -22,6 +23,7 @@ function SearchBar({ setInputCity }) {
         ref={inputRef}
         list="cityData"
       />
+      {/* 城市名稱選項 */}
       <datalist id="cityData">
         {CityData.map((cityName) => (
           <option key={cityName} value={cityName} />

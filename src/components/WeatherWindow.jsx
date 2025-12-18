@@ -1,43 +1,33 @@
-import React from "react";
-
-const WeatherWindow = ({ weatherText }) => {
+const WeatherWindow = ({ weatherText, isDay }) => {
   const text = weatherText || "";
 
-  const hour = new Date().getHours();
-  const isDay = hour >= 6 && hour < 18;
-
+  // 根據日夜選擇圖片資料夾
   const folder = isDay ? "day" : "night";
-  // let bgName = "mostly-clear.jpg";
-  let bgName = "clear.jpg";
 
-  if (text.includes("雨")) bgName = "rain.jpg";
-  else if (text.includes("雷")) bgName = "thunder.jpg";
-  else if (text.includes("雪")) bgName = "snow.jpg";
-  else if (text.includes("陰")) bgName = "overcast.jpg";
-  else if (text.includes("晴時多雲")) bgName = "mostly-clear.jpg";
-  else if (text.includes("多雲時晴")) bgName = "partly-clear.jpg";
-  else if (text.includes("雲")) bgName = "cloudy.jpg";
-  else if (text.includes("晴")) bgName = "clear.jpg";
+  const rules = [
+    { key: "晴時多雲", img: "mostly-clear.jpg" },
+    { key: "多雲時晴", img: "partly-clear.jpg" },
+    { key: "雨", img: "rain.jpg" },
+    { key: "雷", img: "thunder.jpg" },
+    { key: "雪", img: "snow.jpg" },
+    { key: "陰", img: "overcast.jpg" },
+    { key: "雲", img: "cloudy.jpg" },
+    { key: "晴", img: "clear.jpg" },
+  ];
+
+  const rule = rules.find((r) => text.includes(r.key));
+  const bgName = rule ? rule.img : "clear.jpg";
 
   const bgImage = `${import.meta.env.BASE_URL}${folder}/${bgName}`;
 
   return (
-    <>
+    <div className="weather-window-container">
+      <div className="weatherbg-overlay"></div>
       <div
-        className="weatherbg"
-        style={{
-          backgroundColor: "black",
-          opacity: "0.5",
-          zIndex: -1,
-        }}
+        className="weatherbg-image"
+        style={{ backgroundImage: `url(${bgImage})` }}
       ></div>
-      <div
-        className="weatherbg"
-        style={{
-          backgroundImage: `url(${bgImage})`,
-        }}
-      ></div>
-    </>
+    </div>
   );
 };
 
